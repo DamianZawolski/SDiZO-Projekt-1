@@ -12,6 +12,7 @@ class Funkcje {
 
 using namespace std;
 
+
 void wczytajLiczby() {
     ifstream plik("liczby.txt");
     int liczby[10];
