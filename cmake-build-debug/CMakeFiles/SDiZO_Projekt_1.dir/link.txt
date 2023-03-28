@@ -1,0 +1,3 @@
+C:\Users\Damian\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8836.42\bin\cmake\win\x64\bin\cmake.exe -E rm -f CMakeFiles\SDiZO_Projekt_1.dir/objects.a
+C:\Users\Damian\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8836.42\bin\mingw\bin\ar.exe qc CMakeFiles\SDiZO_Projekt_1.dir/objects.a @CMakeFiles\SDiZO_Projekt_1.dir\objects1.rsp
+C:\Users\Damian\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8836.42\bin\mingw\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\SDiZO_Projekt_1.dir/objects.a -Wl,--no-whole-archive -o SDiZO_Projekt_1.exe -Wl,--out-implib,libSDiZO_Projekt_1.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\SDiZO_Projekt_1.dir\linklibs.rsp
