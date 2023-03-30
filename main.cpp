@@ -53,10 +53,10 @@ int main()
                         break;
                     }
                     case 9:
-                        cout << "Powrót" << endl;
+                        cout << "Powrot" << endl;
                         break;
                     default:
-                        cout << "Nieprawidlowy wybór. Sprobuj ponownie." << endl;}}
+                        cout << "Nieprawidlowy wybor. Sprobuj ponownie." << endl;}}
             case 2:
                 cout << "Wybrano opcje 2 Lista" << endl;
                 break;
@@ -70,7 +70,7 @@ int main()
                 cout << "Konczenie pracy programu" << endl;
                 break;
             default:
-                cout << "Nieprawidlowy wybór. Sprobuj ponownie." << endl;
+                cout << "Nieprawidlowy wybor. Sprobuj ponownie." << endl;
         }
     } while(wybor != 9);
 
