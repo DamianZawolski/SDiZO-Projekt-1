@@ -4,11 +4,11 @@ using namespace std;
 
 int main()
 {
+    cout << endl << "Damian Zawolski 260353 SDiZO Projekt 1:" << endl;
     int wybor;
-    int liczbaLiczb = 10;
+    int liczbaLiczb = liczbaLiczbWPliku();
+    int* liczby = wczytajLiczby();
     do {
-        cout << endl << "Damian Zawolski 260353 SDiZO Projekt 1:" << endl;
-        int* liczby = wczytajLiczby(liczbaLiczb);
         cout << "---------------------" << endl;
         cout << "Menu wyboru:" << endl;
         cout << "1. Tablica" << endl;
@@ -24,8 +24,39 @@ int main()
             case 1:
             {
                 cout << "Wybrano opcje 1 Tablica" << endl;
-                int* tablicaWyjsciowa = kopiujTablice(liczby, liczbaLiczb);
-                break;}
+                int* tablicaWyjsciowa;
+                if (tablicaWyjsciowa== nullptr){
+                    tablicaWyjsciowa = kopiujTablice(liczby, liczbaLiczb);
+                }
+                int wybor2;
+                cout << "1. Dodaj element do tablicy" << endl;
+                cout << "2. Usun element z tablicy" << endl;
+                cout << "9. Powrot" << endl;
+                cin >> wybor2;
+                switch(wybor2) {
+                    case 1:
+                    {
+                        int liczba, indeks;
+                        cout<<"Jaka liczbe chcialbys dodac do tablicy?";
+                        cin>>liczba;
+                        cout<<"Wybierz indeks na ktory chcesz dodac liczbe "<< liczba<<":";
+                        cin>>indeks;
+                        tablicaWyjsciowa = dodaj_liczbe(tablicaWyjsciowa, liczbaLiczb, liczba, indeks);
+                    break;
+                    }
+                    case 2:
+                    {
+                        int indeks;
+                        cout<<"Ktory element chcialbys usunal tablicy? Wprowadz indeks: ";
+                        cin>>indeks;
+                        tablicaWyjsciowa = usun_liczbe(tablicaWyjsciowa, liczbaLiczb, indeks);
+                        break;
+                    }
+                    case 9:
+                        cout << "Powrot" << endl;
+                        break;
+                    default:
+                        cout << "Nieprawidlowy wybor. Sprobuj ponownie." << endl;}}
             case 2:
                 cout << "Wybrano opcje 2 Lista" << endl;
                 break;
@@ -39,7 +70,7 @@ int main()
                 cout << "Konczenie pracy programu" << endl;
                 break;
             default:
-                cout << "Nieprawidlowy wybór. Sprobuj ponownie." << endl;
+                cout << "Nieprawidlowy wybor. Sprobuj ponownie." << endl;
         }
     } while(wybor != 9);
 
