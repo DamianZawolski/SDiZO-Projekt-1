@@ -16,17 +16,18 @@ long long int read_QPC()
     return((long long int)count.QuadPart);
 }
 int liczbaLiczbWPliku(){
-    ifstream plik("C:/Users/Damian/CLionProjects/SDiZO-Projekt-1/liczby.txt");
+    ifstream plik("C:/Users/damia/CLionProjects/SDiZO Projekt 1/liczby.txt");
 
     if (plik.is_open()) {
     int liczbaLiczb;
     plik >> liczbaLiczb;
     return liczbaLiczb;}
     }
+
 //wczytanie liczb z pliku
 int* wczytajLiczby() {
     static int liczby[1000];
-    ifstream plik("C:/Users/Damian/CLionProjects/SDiZO-Projekt-1/liczby.txt");
+    ifstream plik("C:/Users/damia/CLionProjects/SDiZO Projekt 1/liczby.txt");
     int liczbaLiczb;
     if (plik.is_open()) {
 
@@ -109,7 +110,6 @@ int* usun_liczbe(int* tablicaWejsciowa,int liczbaLiczb,int indeks){
     }
 
     delete[] tablicaWejsciowa;
-    tablicaWejsciowa = tablicaWyjsciowa;
 
     // wyświetlanie liczb
     cout << "Tablica po usunieciu liczby z indeksu "<<indeks<<":" << endl;
@@ -119,3 +119,104 @@ int* usun_liczbe(int* tablicaWejsciowa,int liczbaLiczb,int indeks){
     cout<<" |"<<endl;
     return tablicaWyjsciowa; // zwróć nową tablicę z dodanym elementem
 }
+struct Wezel {
+    int data;
+    Wezel* prev;
+    Wezel* next;
+};
+
+void dodaj_do_listy(Wezel** adres_glowy, int elementy[], int n) {
+    // Przejście po tablicy i dodanie elementów do listy
+    for (int i = 0; i < n; i++) {
+        // Tworzenie nowego elementu
+        Wezel* nowy_wezel = new Wezel;
+        nowy_wezel->data = elementy[i];
+        nowy_wezel->prev = nullptr;
+        nowy_wezel->next = (*adres_glowy);
+
+        // Jeśli lista nie jest pusta, ustawienie wskaźnika prev poprzedniego pierwszego elementu na nowy element
+        if ((*adres_glowy) != nullptr) {
+            (*adres_glowy)->prev = nowy_wezel;
+        }
+
+        // Ustawienie nowego elementu jako pierwszy element listy
+        (*adres_glowy) = nowy_wezel;
+    }
+}
+
+void wyswietl_liste(Wezel* glowa)
+{
+    Wezel* obecny_wezel = glowa;
+    while (obecny_wezel != nullptr) {
+        cout << obecny_wezel->data << " ";
+        obecny_wezel = obecny_wezel->next;
+    }cout<<endl;
+}
+void dodaj_do_listy(Wezel** adres_glowy, int nowa_wartosc, int pozycja) {
+    // Tworzenie nowego elementu
+    Wezel* nowy_wezel = new Wezel;
+    nowy_wezel->data = nowa_wartosc;
+
+    // Przeszukiwanie listy, aby znaleźć element na wskazanej pozycji
+    Wezel* obecny_wezel = (*adres_glowy);
+    for (int i = 1; i < pozycja && obecny_wezel != nullptr; i++) {
+        obecny_wezel = obecny_wezel->next;
+    }
+
+    // Jeśli lista jest pusta lub pozycja jest większa niż liczba elementów w liście, ustawienie nowego elementu jako ostatni element
+    if (obecny_wezel == nullptr) {
+        nowy_wezel->prev = nullptr;
+        nowy_wezel->next = (*adres_glowy);
+        if ((*adres_glowy) != nullptr) {
+            (*adres_glowy)->prev = nowy_wezel;
+        }
+        (*adres_glowy) = nowy_wezel;
+    }
+        // W przeciwnym przypadku, wstawienie nowego elementu przed elementem na wskazanej pozycji
+    else {
+        nowy_wezel->prev = obecny_wezel->prev;
+        nowy_wezel->next = obecny_wezel;
+        if (obecny_wezel->prev != nullptr) {
+            obecny_wezel->prev->next = nowy_wezel;
+        }
+        obecny_wezel->prev = nowy_wezel;
+    }
+
+
+}
+
+void usun_z_listy(Wezel** adres_glowy, int pozycja) {
+    // Jeśli lista jest pusta, nie ma nic do usunięcia
+    if (*adres_glowy == nullptr) {
+        return;
+    }
+
+    Wezel* obecny_wezel = *adres_glowy;
+    int licznik = 1;
+
+    // Przejście do elementu, który chcemy usunąć
+    while (obecny_wezel != nullptr && licznik != pozycja) {
+        obecny_wezel = obecny_wezel->next;
+        licznik++;
+    }
+
+    // Jeśli pozycja jest poza zakresem listy, nie ma nic do usunięcia
+    if (obecny_wezel == nullptr) {
+        return;
+    }
+
+    // Jeśli element do usunięcia jest pierwszym elementem, ustawienie nowej głowy listy
+    if (obecny_wezel == *adres_glowy) {
+        *adres_glowy = obecny_wezel->next;
+    }
+
+    // Usunięcie elementu
+    if (obecny_wezel->prev != nullptr) {
+        obecny_wezel->prev->next = obecny_wezel->next;
+    }
+    if (obecny_wezel->next != nullptr) {
+        obecny_wezel->next->prev = obecny_wezel->prev;
+    }
+    delete obecny_wezel;
+}
+

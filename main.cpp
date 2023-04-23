@@ -57,12 +57,47 @@ int main()
                         break;
                     default:
                         cout << "Nieprawidlowy wybor. Sprobuj ponownie." << endl;}}
-            case 2:
-                cout << "Wybrano opcje 2 Lista" << endl;
-                break;
+            case 2: {
+                cout << "Wybrano opcje 2 Lista dwukierunkowa" << endl;
+                Wezel* head = NULL;
+                if (head == nullptr) {
+                    dodaj_do_listy(&head, liczby, liczbaLiczb);
+                }
+                wyswietl_liste(head);
+                int wybor2;
+                cout << "1. Dodaj element do listy" << endl;
+                cout << "2. Usun element z listy" << endl;
+                cout << "9. Powrot" << endl;
+                cin >> wybor2;
+                switch(wybor2) {
+                    case 1:
+                    {
+                        int liczba, indeks;
+                        cout<<"Jaka liczbe chcialbys dodac do tablicy?";
+                        cin>>liczba;
+                        cout<<"Wybierz indeks na ktory chcesz dodac liczbe "<< liczba<<":";
+                        cin>>indeks;
+                        dodaj_do_listy(&head, liczba, indeks);
+                        break;
+                    }
+                    case 2:
+                    {
+                        int indeks;
+                        cout<<"Ktory element chcialbys usunal tablicy? Wprowadz indeks: ";
+                        cin>>indeks;
+                        usun_z_listy(&head, indeks);
+                        break;
+                    }
+                    case 9:
+                        cout << "Powrot" << endl;
+                        break;
+                    default:
+                        cout << "Nieprawidlowy wybor. Sprobuj ponownie." << endl;}}
+
             case 3:
+            {
                 cout << "Wybrano opcje 3 Kopiec binarny" << endl;
-                break;
+                break;}
             case 4:
                 cout << "Wybrano opcje 4 Drzewo BST" << endl;
                 break;
