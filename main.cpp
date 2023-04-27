@@ -5,9 +5,12 @@ using namespace std;
 int main()
 {
     cout << endl << "Damian Zawolski 260353 SDiZO Projekt 1:" << endl;
+    string nazwa_pliku;
+    cout<<"Podaj nazwe pliku: ";
+    cin>>nazwa_pliku;
     int wybor;
-    int liczbaLiczb = liczbaLiczbWPliku();
-    int* liczby = wczytajLiczby();
+    int liczbaLiczb = liczbaLiczbWPliku(nazwa_pliku);
+    int* liczby = wczytajLiczby(nazwa_pliku);
     do {
         cout << "---------------------" << endl;
         cout << "Menu wyboru:" << endl;
@@ -97,7 +100,25 @@ int main()
             case 3:
             {
                 cout << "Wybrano opcje 3 Kopiec binarny" << endl;
-                break;}
+                Wezel* head = NULL;
+                if (head == nullptr) {
+                    dodaj_do_listy(&head, liczby, liczbaLiczb);
+                }
+                wyswietl_liste(head);
+                int wybor2;
+                cout << "1. Dodaj element do listy" << endl;
+                cout << "2. Usun element z listy" << endl;
+                cout << "9. Powrot" << endl;
+                cin >> wybor2;
+
+                switch(wybor2) {
+                    case 1:
+                    {}
+                    case 9:
+                        cout << "Powrot" << endl;
+                        break;
+                    default:
+                        cout << "Nieprawidlowy wybor. Sprobuj ponownie." << endl;}}
             case 4:
                 cout << "Wybrano opcje 4 Drzewo BST" << endl;
                 break;

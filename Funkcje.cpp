@@ -15,19 +15,22 @@ long long int read_QPC()
     QueryPerformanceCounter(&count);
     return((long long int)count.QuadPart);
 }
-int liczbaLiczbWPliku(){
-    ifstream plik("C:/Users/damia/CLionProjects/SDiZO Projekt 1/liczby.txt");
-
-    if (plik.is_open()) {
+int liczbaLiczbWPliku(string nazwa_pliku){
+    nazwa_pliku = "C:/Users/Damian/CLionProjects/SDiZO-Projekt-1/" + nazwa_pliku;
+    ifstream plik(nazwa_pliku);
     int liczbaLiczb;
-    plik >> liczbaLiczb;
-    return liczbaLiczb;}
+    if (plik.is_open()) {
+
+    plik >> liczbaLiczb;}
+    plik.close();
+    return liczbaLiczb;
     }
 
 //wczytanie liczb z pliku
-int* wczytajLiczby() {
+int* wczytajLiczby(string nazwa_pliku) {
     static int liczby[1000];
-    ifstream plik("C:/Users/damia/CLionProjects/SDiZO Projekt 1/liczby.txt");
+    nazwa_pliku = "C:/Users/Damian/CLionProjects/SDiZO-Projekt-1/" + nazwa_pliku;
+    ifstream plik(nazwa_pliku);
     int liczbaLiczb;
     if (plik.is_open()) {
 
@@ -73,13 +76,17 @@ int* kopiujTablice(int* tablicaWejsciowa, int rozmiarTablicy) {
 int* dodaj_liczbe(int* tablicaWejsciowa,int liczbaLiczb,int liczba,int indeks){
     int* tablicaWyjsciowa = new int[liczbaLiczb + 1]; // alokuj nową tablicę z rozmiarem zwiększonym o 1
     for (int i = 0; i < indeks; i++) {
+        cout<<i;
+        cout<<indeks;
         tablicaWyjsciowa[i] = tablicaWejsciowa[i]; // skopiuj elementy z tablicy pierwotnej do nowej tablicy do wskazanego indeksu
     }
     tablicaWyjsciowa[indeks] = liczba; // wstaw nowy element na wskazany indeks
+
     for (int i = indeks + 1; i < liczbaLiczb + 1; i++) {
         tablicaWyjsciowa[i] = tablicaWejsciowa[i - 1]; // skopiuj pozostałe elementy z tablicy pierwotnej do nowej tablicy
     }
     liczbaLiczb++; // zwiększ rozmiar tablicy
+
     delete[] tablicaWejsciowa; // zwolnij pamięć zaalokowaną dla pierwotnej tablicy
 
     // wyświetlanie liczb

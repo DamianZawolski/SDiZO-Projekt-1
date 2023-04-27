@@ -1,15 +1,15 @@
 //
 // Created by damia on 27.03.2023.
 //
-
+#include <string>
 #ifndef SDIZO_PROJEKT_1_FUNKCJE_H
 #define SDIZO_PROJEKT_1_FUNKCJE_H
 
-int* wczytajLiczby();
+int* wczytajLiczby(std::string nazwa_pliku);
 
 int* kopiujTablice(int* tablicaWejsciowa, int rozmiarTablicy);
 
-int liczbaLiczbWPliku();
+int liczbaLiczbWPliku(std::string nazwa_pliku);
 
 int* dodaj_liczbe(int* tablicaWejsciowa, int liczbaLiczb, int liczba,int indeks);
 
