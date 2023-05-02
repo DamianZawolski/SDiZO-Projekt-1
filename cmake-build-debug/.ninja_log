@@ -1,0 +1,15 @@
+# ninja log v5
+1	201	7046911102555109	build.ninja	be2857636b13a17a
+581	1043	7046902199364110	CMakeFiles/SDiZO_Projekt_1.dir/Tablica.cpp.obj	7c7a8fa21c3c4532
+5	621	7046902195123157	CMakeFiles/SDiZO_Projekt_1.dir/main.cpp.obj	b2a434c660317745
+0	1281	7046904459180915	CMakeFiles/SDiZO_Projekt_1.dir/testy.cpp.obj	e2d10f492cab860c
+14	632	7046902195235428	CMakeFiles/SDiZO_Projekt_1.dir/Funkcje.cpp.obj	7640e2ba7023e46a
+25	581	7046902194686175	CMakeFiles/SDiZO_Projekt_1.dir/lista.cpp.obj	f0f8643570a79b0c
+1	325	7046905462585753	SDiZO_Projekt_1.exe	a304bb1a486c458a
+34	572	7046902194655552	CMakeFiles/SDiZO_Projekt_1.dir/kopiec.cpp.obj	b3af0561d617e664
+14	435	7046911237666072	CMakeFiles/SDiZO_Projekt_1.dir/kopiec.cpp.obj	db69acb9b8345d57
+16	450	7046911237801669	CMakeFiles/SDiZO_Projekt_1.dir/Tablica.cpp.obj	908b002099e2f1c5
+0	497	7046911238273527	CMakeFiles/SDiZO_Projekt_1.dir/Funkcje.cpp.obj	c00ab747bfab1aa2
+7	503	7046911238338665	CMakeFiles/SDiZO_Projekt_1.dir/main.cpp.obj	5a7040700432c232
+450	822	7046911241537714	CMakeFiles/SDiZO_Projekt_1.dir/lista.cpp.obj	e6674391924d5b1f
+4	1704	7046911861842111	CMakeFiles/SDiZO_Projekt_1.dir/testy.cpp.obj	a0415576a2ce3d67
