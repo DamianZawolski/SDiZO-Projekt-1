@@ -1,5 +1,6 @@
 #include <iostream>
 #include "lista.h"
+#include <string>
 using namespace std;
 
 lista::lista()
@@ -120,7 +121,9 @@ void lista::usun_pierwszy(){
     auto *pomocnicza = new Element;
     pomocnicza = glowa;
     if (pomocnicza->nastepny == nullptr) {
-        delete pomocnicza;
+        ogon = nullptr;
+        glowa = nullptr;
+        rozmiar--;
         return;
     }
     glowa = glowa->nastepny;
@@ -136,7 +139,8 @@ void lista::usun_ostatni() {
     auto *pomocnicza = new Element;
     pomocnicza = ogon;
     if (ogon->poprzedni == nullptr) {
-        delete ogon;
+        ogon = nullptr;
+        glowa = nullptr;
     } else {
         ogon = ogon->poprzedni; //Ogonem staje się poprzedni element
         ogon->nastepny = nullptr;
@@ -150,17 +154,19 @@ void lista::usun(int pozycja) {
     if (glowa == nullptr) //Jeśli nie ma pierwszego elementu to nic nie usuwamy
         return;
 
-    if(pozycja >= rozmiar)  //Jeśli znajdz_wartosc jest większa od rozmiaru to usuwamy ostatni
-    {
+    else if (pozycja>=rozmiar){    //Jeśli znajdz_wartosc jest większa od rozmiaru to usuwamy ostatni
         usun_ostatni();
+        pozycja = rozmiar-1;
     }
-    else if(pozycja == 0 ) //Jeśli znajdz_wartosc jest równa 0 to usuwamy pierwszy element
+    else if(pozycja <= 0 ) //Jeśli znajdz_wartosc jest równa/ mniejsza od 0 to usuwamy pierwszy element
     {
         usun_pierwszy();
     }
-
+    if (glowa == nullptr) //Jeśli nie ma pierwszego elementu to nic nie robimy
+        return;
     auto *obecny = new Element;
     obecny = glowa;
+
     if(pozycja == 1)    // Osobno obsługujemy element o indeksie 1, bo wpływa na głowę
     {
         obecny->nastepny->poprzedni = glowa;
@@ -182,7 +188,6 @@ void lista::usun(int pozycja) {
             delete obecny;
             return;
         }
-
         obecny->poprzedni->nastepny = obecny->nastepny;
         obecny->nastepny->poprzedni = obecny->poprzedni;
         rozmiar--;
@@ -253,13 +258,23 @@ int lista::znajdz_wartosc(int wartosc) {
     int pomocnicza = 0;
 
     while (element->nastepny != nullptr) {
-        pomocnicza++;
+
         if(element->wartosc == wartosc)
         {
             pozycja = pomocnicza;
             break;
         }
         element = element->nastepny;
+        pomocnicza++;
+    }
+    if(element->wartosc == wartosc)
+    {
+        pozycja = pomocnicza;}
+    if (pozycja == -1){
+        cout<<"Brak wartosci " + to_string(wartosc) + " w liscie."<<endl;
+    }
+    else{
+        cout<<"Wartosc " + to_string(wartosc) +" znajduje sie na pozycji " + to_string(pozycja)<<endl;
     }
     return pozycja;
 }

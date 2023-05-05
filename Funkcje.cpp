@@ -4,8 +4,8 @@
 using namespace std;
 
 int liczbaLiczbWPliku(string nazwa_pliku){
-    nazwa_pliku = "C:/Users/damia/CLionProjects/SDiZO Projekt 1/" + nazwa_pliku;
-    ifstream plik(nazwa_pliku);
+    ifstream plik;
+    plik.open(nazwa_pliku);
     int liczbaLiczb;
     if (plik.is_open()) {
 
@@ -17,8 +17,8 @@ int liczbaLiczbWPliku(string nazwa_pliku){
 //wczytanie liczb z pliku
 int* wczytajLiczby(string nazwa_pliku) {
     static int liczby[1000000];
-    nazwa_pliku = "C:/Users/damia/CLionProjects/SDiZO Projekt 1/" + nazwa_pliku;
-    ifstream plik(nazwa_pliku);
+    ifstream plik;
+    plik.open(nazwa_pliku);
     int liczbaLiczb;
     if (plik.is_open()) {
 

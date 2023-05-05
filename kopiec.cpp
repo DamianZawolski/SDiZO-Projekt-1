@@ -1,6 +1,18 @@
 #include <iostream>
 #include "kopiec.h"
+#include <cmath>
+#include <string>
 using namespace std;
+
+int kopiec::lewe_dziecko(int indeks)
+{
+    return (indeks * 2) + 1;
+}
+
+int kopiec::prawe_dziecko(int indeks)
+{
+    return (indeks * 2) + 2;
+}
 
 kopiec::kopiec()
 //konstruktor- ustawiamy wielkość naszego kopca na 0
@@ -12,79 +24,118 @@ void kopiec::dodaj(int liczba)
 // Dodawanie liczby "liczba" do kopca
 {
     rozmiar++; //zwiększenie rozmiaru kopca
-    kopiec_binarny.dodaj_na_koniec(liczba); // dodanie nowego elementu
-    int pozycja = rozmiar - 1;
-    while (pozycja > 1)
-    {
-        if (kopiec_binarny.tablica[pozycja / 2] < kopiec_binarny.tablica[pozycja])  // Zamiana miejscami, jeśli dziecko jest większe od rodzica
-        {
-            kopiec_binarny.zamien_elementy(pozycja / 2, pozycja);
-            pozycja = pozycja / 2;
-        } else break;
+    tablica.dodaj_na_koniec(liczba); // dodanie nowego elementu
+    int dziecko = rozmiar - 1;
+    int* tablica_dynamiczna = tablica.zwroc_tablice();
+    while (dziecko > 1 && tablica_dynamiczna[dziecko] > tablica_dynamiczna[dziecko / 2]){
+        tablica.zamien_elementy(dziecko, dziecko / 2);
+        dziecko = dziecko / 2;
     }
+    przywroc_wlasciwosci(0);
+    cout<<"Kopiec po dodaniu elementu " + to_string(liczba)<<endl;
+    tablica.wyswietl();
 }
 
-void kopiec::usun() {
+void kopiec::usun_ze_szczytu() {
 // Usuwanie elementu z kopca
     if (rozmiar == 0) {
         return;
 
     } else if (rozmiar == 1) {
-        kopiec_binarny.usun_ostatni();
+        tablica.usun_ostatni();
+        rozmiar --;
 
-    } else {
-        kopiec_binarny.zamien_elementy(1, rozmiar);
-        int pozycja = 1;
-        while (pozycja * 2 < rozmiar) {
-            int dziecko = pozycja * 2;
-
-            if (dziecko != rozmiar - 1) {
-                if (dziecko < dziecko + 1) {
-                    dziecko++;
-                }
-            }
-            if (dziecko > pozycja) {
-                kopiec_binarny.zamien_elementy(dziecko, pozycja);
-                pozycja = dziecko;
-            } else {
-                break;
-            }
-        }
-        rozmiar = rozmiar - 1;
     }
-}
+    else {
+        tablica.zamien_elementy(0, rozmiar-1);
+        tablica.usun_ostatni();
+        rozmiar --;
+        przywroc_wlasciwosci(0);
+
+    }
+            cout<<"Kopiec po usunieciu elementu ze szczytu"<<endl;
+            tablica.wyswietl();
+
+    }
 
 void kopiec::wyswietl()
 //Wyświetlanie kopca
 {
+
+    int poziomy = 0;
+    while (pow(2,poziomy)<rozmiar){
+        poziomy++;
+    }
     int n = 1;
 
-    for (int i = 1; i < rozmiar; i++) {
+    for (int i = 0; i < rozmiar; i++) {
 
         if ((n & (n - 1)) == 0) // Dodawanie nowych linii w celu zwiększenie estetyki/ czytelności kopca
         {
             cout << endl;
+            for (int j = 0; j <=poziomy; j++){
+                cout<<" ";
+            }
+            poziomy--;
         }
 
-        cout << kopiec_binarny.tablica[i] << " ";
+        cout << tablica.tablica[i] << " ";
         n++;
 
     }
-    cout << endl;
+    cout << endl<< endl;
 }
 
-bool kopiec::znajdz(int wartosc)
+void kopiec::znajdz(int wartosc)
 // Szukanie wartości w kopcu
 {
     bool czy_znaleziono = false;
-    for(int i = 0; i < kopiec_binarny.rozmiar; i++)
+    int indeks;
+    for(int i = 0; i < tablica.rozmiar; i++)
     {
-        if(kopiec_binarny.tablica[i] == wartosc)
+        if(tablica.tablica[i] == wartosc)
         {
             czy_znaleziono = true;
+            indeks = i;
             break;
         }
     }
-    return czy_znaleziono;
+    if (czy_znaleziono)
+        cout<<"Wartosc " + to_string(wartosc) + " ma indeks " + to_string(indeks) <<endl;
+    else
+        cout<<"Nie znaleziono wartosci " + to_string(wartosc) + " w kopcu"<<endl;
+}
 
+void kopiec::przywroc_wlasciwosci(int indeks){
+    int* tablica_dynamiczna = tablica.zwroc_tablice();
+    int lewe_dziecko_elementu = lewe_dziecko(indeks);
+    int prawe_dziecko_elementu = prawe_dziecko(indeks);
+    int maksymalny_indeks = rozmiar - 1;
+    if (lewe_dziecko_elementu <= maksymalny_indeks){    //jeśli indeks lewego dziecka mieści się w kopcu
+        if (tablica_dynamiczna[lewe_dziecko_elementu] > tablica_dynamiczna[indeks]){    //jeśli lewe dziecko jest większe od rodzica
+            if (prawe_dziecko_elementu <= maksymalny_indeks && tablica_dynamiczna[prawe_dziecko_elementu] >= tablica_dynamiczna[lewe_dziecko_elementu]){    //jeśli prawe dziecko elementu jest większe od lewego
+                tablica.zamien_elementy(indeks, prawe_dziecko_elementu);
+                przywroc_wlasciwosci(prawe_dziecko_elementu);
+            }
+            else{
+                tablica.zamien_elementy(indeks, lewe_dziecko_elementu);
+                przywroc_wlasciwosci(lewe_dziecko_elementu);
+            }
+        }
+    }
+    else if (prawe_dziecko_elementu <= maksymalny_indeks){  //jeśli indeks prawego dziecka mieści się w kopcu
+        if (tablica_dynamiczna[prawe_dziecko_elementu]> tablica_dynamiczna[indeks]) {   //jeśli prawe dziecko jest większe od rodzica
+            if (lewe_dziecko_elementu <= maksymalny_indeks && tablica_dynamiczna[lewe_dziecko_elementu] >= tablica_dynamiczna[prawe_dziecko_elementu]){    //jeśli lewe dziecko elementu jest większe od prawego
+                tablica.zamien_elementy(indeks, lewe_dziecko_elementu);
+                przywroc_wlasciwosci(lewe_dziecko_elementu);
+            }
+            else{
+                tablica.zamien_elementy(indeks, prawe_dziecko_elementu);
+                przywroc_wlasciwosci(prawe_dziecko_elementu);
+            }
+        }
+    }
+    else{
+        return;
+    }
 }

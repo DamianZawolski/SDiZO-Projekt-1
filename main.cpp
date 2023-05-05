@@ -27,12 +27,18 @@ int main()
     int wybor1;
     int wybor2;
     int wybor3;
+    bool tablica_ustawiona = false;
+    bool lista_ustawiona = false;
+    bool kopiec_ustawiony = false;
     auto tablica_dynamiczna = tablicaDynamiczna();
     lista lista_dwukierunkowa;
     kopiec kopiec_binarny;
     int liczbaLiczb = liczbaLiczbWPliku(nazwa_pliku);
     int* liczby = wczytajLiczby(nazwa_pliku);
     do {
+        tablica_ustawiona = false;
+        lista_ustawiona = false;
+        kopiec_ustawiony = false;
         cout << "---------------------" << endl;
         cout << "Menu wyboru:" << endl;
         cout << "1. Tablica dynamiczna" << endl;
@@ -48,11 +54,12 @@ int main()
             {
                 cout <<endl<< "Tablica" << endl;
 
-                if (tablica_dynamiczna.rozmiar == 0){
+                if (tablica_dynamiczna.rozmiar == 0 && !tablica_ustawiona){
                     for (int i=0; i<liczbaLiczb; i++){
                         tablica_dynamiczna.dodaj_na_poczatek(liczby[i]);
                     }
-
+                    tablica_ustawiona = true;
+                    tablica_dynamiczna.wyswietl();
                 }
                 cout << "1. Dodaj element na poczatek tablicy" << endl;
                 cout << "2. Dodaj element na koniec tablicy" << endl;
@@ -60,6 +67,7 @@ int main()
                 cout << "4. Usun pierwszy element z tablicy" << endl;
                 cout << "5. Usun ostatni element z tablicy" << endl;
                 cout << "6. Usun wybrany element z tablicy" << endl;
+                cout << "7. Wyszukaj wartosc w tablicy" << endl;
 
                 cout << "9. Powrot" << endl;
                 cin >> wybor1;
@@ -110,6 +118,14 @@ int main()
                         tablica_dynamiczna.usun(indeks);
                         tablica_dynamiczna.wyswietl();
                     }
+                else if (wybor1 == 7)
+                {
+                    int wartosc;
+                    cout<<"Ktory element chcialbys wyszukac w tablicy? Wprowadz wartosc: ";
+                    cin>>wartosc;
+                    tablica_dynamiczna.znajdz_element(wartosc);
+                    tablica_dynamiczna.wyswietl();
+                }
                 else if (wybor1 == 9){
                         cout << "Powrot" << endl;
                         break;}
@@ -119,10 +135,11 @@ int main()
         else if (wybor == 2){
             do{{
                 cout << endl<<"Lista dwukierunkowa"<<endl;
-                if (lista_dwukierunkowa.rozmiar==0) {
+                if (lista_dwukierunkowa.rozmiar==0 && !lista_ustawiona) {
                     for (int i=0; i<liczbaLiczb; i++){
                         lista_dwukierunkowa.dodaj_na_poczatek(liczby[i]);
                 }
+                    lista_ustawiona = true;
                 }
                 cout << "1. Dodaj element na poczatek listy" << endl;
                 cout << "2. Dodaj element na koniec listy" << endl;
@@ -130,6 +147,7 @@ int main()
                 cout << "4. Usun pierwszy element z listy" << endl;
                 cout << "5. Usun ostatni element z listy" << endl;
                 cout << "6. Usun wybrany element z listy" << endl;
+                cout << "7. Wyszukaj wartosc w tablicy" << endl;
                 cout << "9. Powrot" << endl;
                 cin >> wybor2;
                 if (wybor2==1)
@@ -190,13 +208,24 @@ int main()
                         int indeks;
                         cout<<"Ktory element chcialbys usunac z listy? Wprowadz indeks: ";
                         cin>>indeks;
-                        cout<<"Usuwanie pierwszego elementu z listy"<<endl;
+                        cout<<"Usuwanie " + to_string(indeks) + " elementu z listy"<<endl;
                         lista_dwukierunkowa.usun(indeks);
                         cout<<"Lista od przodu"<<endl;
                         lista_dwukierunkowa.wyswietl_od_przodu();
                         cout<<"Lista od tylu"<<endl;
                         lista_dwukierunkowa.wyswietl_od_tylu();
                     }
+                else if (wybor2 == 7)
+                {
+                    int wartosc;
+                    cout<<"Ktory element chcialbys wyszukac w liscie? Wprowadz wartosc: ";
+                    cin>>wartosc;
+                    lista_dwukierunkowa.znajdz_wartosc(wartosc);
+                    cout<<"Lista od przodu"<<endl;
+                    lista_dwukierunkowa.wyswietl_od_przodu();
+                    cout<<"Lista od tylu"<<endl;
+                    lista_dwukierunkowa.wyswietl_od_tylu();
+                }
                 else if (wybor2==9) {
                         cout << "Powrot" << endl;
                         break;
@@ -208,14 +237,16 @@ int main()
             do{
             {
                 cout <<endl<< "Kopiec binarny" << endl;
-                if (kopiec_binarny.rozmiar==0) {
+                if (kopiec_binarny.rozmiar==0 && !kopiec_ustawiony) {
                     for (int i=0; i<liczbaLiczb; i++){
                         kopiec_binarny.dodaj(liczby[i]);
                     }
+                    kopiec_ustawiony = true;
+                    kopiec_binarny.przywroc_wlasciwosci(0);
                 }
                 kopiec_binarny.wyswietl();
                 cout << "1. Dodaj element do kopca" << endl;
-                cout << "2. Usun element z kopca" << endl;
+                cout << "2. Usun element ze szczytu kopca" << endl;
                 cout << "3. Znajdz wartosc w kopcu"<<endl;
                 cout << "9. Powrot" << endl;
                 cin >> wybor3;
@@ -226,25 +257,18 @@ int main()
                         cout<<"Jaka liczbe chcialbys dodac do kopca?";
                         cin>>liczba;
                         kopiec_binarny.dodaj(liczba);
-                        kopiec_binarny.wyswietl();
                     }
                 else if (wybor3 == 2){
 
-                        cout<<"Usuwanie wartosci z kopca";
-                        kopiec_binarny.usun();
-                        kopiec_binarny.wyswietl();
+                        cout<<"Usuwanie ze szczytu";
+                        kopiec_binarny.usun_ze_szczytu();
+
                     }
                 else if (wybor3 == 3){
                         int liczba;
                         cout<<"Jaka wartosc chcialbys znalezc w kopcu";
                         cin>>liczba;
-                        bool znaleziona = kopiec_binarny.znajdz(liczba);
-                        if (znaleziona){
-                            cout<<"Udalo sie znalezc wartosc " + to_string(liczba)<<endl;
-                        }
-                        else{
-                            cout<<"Nie udalo sie znalezc wartosci " +to_string(liczba)<<endl;
-                        }
+                        kopiec_binarny.znajdz(liczba);
                     }
                 else if (wybor3 == 9) {
                     cout << "Powrot" << endl;

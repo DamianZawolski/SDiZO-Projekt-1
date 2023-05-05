@@ -167,13 +167,13 @@ int testy(){
 
     start = read_QPC(); //rozpoczynamy liczenie czasu
     for (int i=0; i<liczba; i++){
-        kopiec_binarny.znajdz(tablica_liczb[losowa_w_zakresie(0,kopiec_binarny.kopiec_binarny.rozmiar)]);}
+        kopiec_binarny.znajdz(tablica_liczb[losowa_w_zakresie(0,kopiec_binarny.tablica.rozmiar)]);}
     kopiec_znajdz = read_QPC() - start; //kończymy liczenie czasu
     cout << "Czas znajdowania elementow w kopcu [s] = " << fixed << setprecision(3) << (float)kopiec_znajdz /
                                                                           czestotliwosc << endl;
     start = read_QPC(); //rozpoczynamy liczenie czasu
     for (int i=0; i<liczba-1; i++){
-        kopiec_binarny.usun();}
+        kopiec_binarny.usun_ze_szczytu();}
     kopiec_usun = read_QPC() - start; //kończymy liczenie czasu
     cout << "Czas usuwania elementow z kopca [s] = " << fixed << setprecision(3) << (float)kopiec_usun /
                                                                                   czestotliwosc << endl;

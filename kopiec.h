@@ -12,17 +12,23 @@ class kopiec{
 public:
 
     int rozmiar;
-    tablicaDynamiczna kopiec_binarny;
+    tablicaDynamiczna tablica;
 
     kopiec();
 
     void dodaj(int liczba);
 
-    void usun();
+    void usun_ze_szczytu();
 
     void wyswietl();
 
-    bool znajdz(int value);
+    void znajdz(int value);
+
+    void przywroc_wlasciwosci(int indeks);
+
+    int lewe_dziecko(int indeks);
+
+    int prawe_dziecko(int indeks);
 
 };
 #endif //SDIZO_PROJEKT_1_KOPIEC_H

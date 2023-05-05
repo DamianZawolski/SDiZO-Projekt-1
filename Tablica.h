@@ -32,7 +32,7 @@ public:
 
     void wyswietl();
 
-
+    int* zwroc_tablice();
 };
 
 #endif //SDIZO_PROJEKT_1_TABLICA_H

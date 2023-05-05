@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "Tablica.h"
 using namespace std;
 
@@ -33,12 +34,11 @@ void tablicaDynamiczna::dodaj_na_koniec(int wartosc)
     nowa_tablica[rozmiar] = wartosc;
 
 
-    for(int i = 0; i < rozmiar - 1; i++)
+    for(int i = 0; i < rozmiar; i++)
     {
         nowa_tablica[i] = tablica[i];
     }
-
-    delete tablica;
+    tablica = nullptr;
     tablica = nowa_tablica;
     rozmiar++;
 
@@ -49,11 +49,15 @@ void tablicaDynamiczna::dodaj_na_pozycje(int wartosc, int pozycja)
 {
     if(pozycja < 0)
     {
-        cout<<" Indeks ujemny- element zostanie wstawiony na początek listy. "<<endl;
+        cout<<" Indeks ujemny- element zostanie wstawiony na poczatek listy. "<<endl;
         dodaj_na_poczatek(wartosc);
     }
+    else if(pozycja >= rozmiar){
+        cout<<" Indeks wiekszy od rozmiaru- element zostanie wstawiony na koniec listy. "<<endl;
+        dodaj_na_koniec(wartosc);
+    }
     else {
-        int *nowa_tablica = new int[rozmiar + 1];  //nowa kopiec_binarny o rozmiarze większym o 1
+        int *nowa_tablica = new int[rozmiar + 1];  //nowa lista o rozmiarze większym o 1
 
         for (int i = 0; i < pozycja; i++)  //przepisanie wartości do nowej tablicy
         {
@@ -75,34 +79,41 @@ void tablicaDynamiczna::dodaj_na_pozycje(int wartosc, int pozycja)
 void tablicaDynamiczna::usun_ostatni()
 //usuń ostatni element tablicy
 {
-
-    int* nowa_tablica = new int[rozmiar - 1];
-
-    for(int i = 0; i < rozmiar - 1; i++) //przepisanie wartości do nowej tablicy bez ostatniego elementu
-    {
-        nowa_tablica[i] = tablica[i];
+    if (rozmiar==0){
+        return;
     }
+    else{
+        int* nowa_tablica = new int[rozmiar - 1];
 
-    delete tablica;
-    tablica = nowa_tablica;
-    rozmiar--;
+        for(int i = 0; i < rozmiar - 1; i++) //przepisanie wartości do nowej tablicy bez ostatniego elementu
+        {
+            nowa_tablica[i] = tablica[i];
+        }
+
+        delete tablica;
+        tablica = nowa_tablica;
+        rozmiar--;
+    }
 }
 
 void tablicaDynamiczna::usun_pierwszy()
 //usuń pierwszy element tablicy
 {
-
-    int *nowa_tablica = new int[rozmiar - 1];
-    for (int i = 0; i < rozmiar - 1; i++) //przepisanie wartości do nowej tablicy bez pierwszego elementu
-    {
-        nowa_tablica[i] = tablica[i + 1];
-
+    if (rozmiar==0){
+        return;
     }
+    else{
+        int *nowa_tablica = new int[rozmiar - 1];
+        for (int i = 0; i < rozmiar - 1; i++) //przepisanie wartości do nowej tablicy bez pierwszego elementu
+        {
+            nowa_tablica[i] = tablica[i + 1];
 
-    delete tablica;
-    tablica = nowa_tablica;
-    rozmiar--;
+        }
 
+        delete tablica;
+        tablica = nowa_tablica;
+        rozmiar--;
+    }
 }
 
 void tablicaDynamiczna::usun(int pozycja)
@@ -110,12 +121,12 @@ void tablicaDynamiczna::usun(int pozycja)
 {
     if(pozycja < 0)
     {
-        cout << " Indeks ujemny- zostanie usunięty pierwszy element " <<endl;
+        cout << " Indeks ujemny- zostanie usuniety pierwszy element " <<endl;
         usun_pierwszy();
     }
     else if(pozycja >= rozmiar)
     {
-        cout << " Indeks większy od rozmiaru tablicy- zostanie usunięty ostatni element " <<endl;
+        cout << " Indeks wiekszy od rozmiaru tablicy- zostanie usuniety ostatni element " <<endl;
         usun_ostatni();
     }
     else
@@ -172,5 +183,15 @@ int tablicaDynamiczna::znajdz_element(int wartosc)
             break;
         }
     }
+    if (pozycja == -1){
+        cout<<"Brak wartosci " + to_string(wartosc) + " w tablicy."<<endl;
+    }
+    else{
+        cout<<"Wartosc " + to_string(wartosc) +" znajduje sie na pozycji o indeksie " + to_string(pozycja)<<endl;
+    }
     return pozycja;
+}
+
+int* tablicaDynamiczna::zwroc_tablice(){
+    return tablica;
 }
