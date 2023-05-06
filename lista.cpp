@@ -270,11 +270,6 @@ int lista::znajdz_wartosc(int wartosc) {
     if(element->wartosc == wartosc)
     {
         pozycja = pomocnicza;}
-    if (pozycja == -1){
-        cout<<"Brak wartosci " + to_string(wartosc) + " w liscie."<<endl;
-    }
-    else{
-        cout<<"Wartosc " + to_string(wartosc) +" znajduje sie na pozycji " + to_string(pozycja)<<endl;
-    }
+
     return pozycja;
 }

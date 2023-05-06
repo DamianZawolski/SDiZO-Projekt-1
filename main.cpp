@@ -123,8 +123,14 @@ int main()
                     int wartosc;
                     cout<<"Ktory element chcialbys wyszukac w tablicy? Wprowadz wartosc: ";
                     cin>>wartosc;
-                    tablica_dynamiczna.znajdz_element(wartosc);
+                    int indeks = tablica_dynamiczna.znajdz_element(wartosc);
                     tablica_dynamiczna.wyswietl();
+                    if (indeks == -1){
+                        cout<<"Brak wartosci " + to_string(wartosc) + " w tablicy."<<endl;
+                    }
+                    else{
+                        cout<<"Wartosc " + to_string(wartosc) +" znajduje sie na pozycji o indeksie " + to_string(indeks)<<endl;
+                    }
                 }
                 else if (wybor1 == 9){
                         cout << "Powrot" << endl;
@@ -140,6 +146,10 @@ int main()
                         lista_dwukierunkowa.dodaj_na_poczatek(liczby[i]);
                 }
                     lista_ustawiona = true;
+                    cout<<"Lista od przodu"<<endl;
+                    lista_dwukierunkowa.wyswietl_od_przodu();
+                    cout<<"Lista od tylu"<<endl;
+                    lista_dwukierunkowa.wyswietl_od_tylu();
                 }
                 cout << "1. Dodaj element na poczatek listy" << endl;
                 cout << "2. Dodaj element na koniec listy" << endl;
@@ -220,7 +230,13 @@ int main()
                     int wartosc;
                     cout<<"Ktory element chcialbys wyszukac w liscie? Wprowadz wartosc: ";
                     cin>>wartosc;
-                    lista_dwukierunkowa.znajdz_wartosc(wartosc);
+                    int pozycja = lista_dwukierunkowa.znajdz_wartosc(wartosc);
+                    if (pozycja == -1){
+                        cout<<"Brak wartosci " + to_string(wartosc) + " w liscie."<<endl;
+                    }
+                    else{
+                        cout<<"Wartosc " + to_string(wartosc) +" znajduje sie na pozycji " + to_string(pozycja)<<endl;
+                    }
                     cout<<"Lista od przodu"<<endl;
                     lista_dwukierunkowa.wyswietl_od_przodu();
                     cout<<"Lista od tylu"<<endl;
@@ -254,21 +270,29 @@ int main()
                 if (wybor3 == 1)
                     {
                         int liczba;
-                        cout<<"Jaka liczbe chcialbys dodac do kopca?";
+                        cout<<"Jaka liczbe chcialbys dodac do kopca? ";
                         cin>>liczba;
                         kopiec_binarny.dodaj(liczba);
+                        cout<<"Kopiec po dodaniu elementu " + to_string(liczba)<<endl;
+                        kopiec_binarny.tablica.wyswietl();
                     }
                 else if (wybor3 == 2){
 
                         cout<<"Usuwanie ze szczytu";
                         kopiec_binarny.usun_ze_szczytu();
+                        cout<<"Kopiec po usunieciu elementu ze szczytu"<<endl;
+                        kopiec_binarny.tablica.wyswietl();
 
                     }
                 else if (wybor3 == 3){
                         int liczba;
-                        cout<<"Jaka wartosc chcialbys znalezc w kopcu";
+                        cout<<"Jaka wartosc chcialbys znalezc w kopcu? ";
                         cin>>liczba;
-                        kopiec_binarny.znajdz(liczba);
+                        int czy_znaleziono = kopiec_binarny.znajdz(liczba);
+                        if (czy_znaleziono == -1)
+                            cout<<"Nie znaleziono wartosci " + to_string(liczba) + " w kopcu"<<endl;
+                        else
+                            cout<<"Wartosc " + to_string(liczba) + " ma indeks " + to_string(czy_znaleziono) <<endl;
                     }
                 else if (wybor3 == 9) {
                     cout << "Powrot" << endl;

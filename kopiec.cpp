@@ -32,8 +32,7 @@ void kopiec::dodaj(int liczba)
         dziecko = dziecko / 2;
     }
     przywroc_wlasciwosci(0);
-    cout<<"Kopiec po dodaniu elementu " + to_string(liczba)<<endl;
-    tablica.wyswietl();
+
 }
 
 void kopiec::usun_ze_szczytu() {
@@ -53,8 +52,6 @@ void kopiec::usun_ze_szczytu() {
         przywroc_wlasciwosci(0);
 
     }
-            cout<<"Kopiec po usunieciu elementu ze szczytu"<<endl;
-            tablica.wyswietl();
 
     }
 
@@ -86,24 +83,19 @@ void kopiec::wyswietl()
     cout << endl<< endl;
 }
 
-void kopiec::znajdz(int wartosc)
+int kopiec::znajdz(int wartosc)
 // Szukanie wartości w kopcu
 {
-    bool czy_znaleziono = false;
-    int indeks;
+    int indeks = -1;
     for(int i = 0; i < tablica.rozmiar; i++)
     {
         if(tablica.tablica[i] == wartosc)
         {
-            czy_znaleziono = true;
             indeks = i;
             break;
         }
     }
-    if (czy_znaleziono)
-        cout<<"Wartosc " + to_string(wartosc) + " ma indeks " + to_string(indeks) <<endl;
-    else
-        cout<<"Nie znaleziono wartosci " + to_string(wartosc) + " w kopcu"<<endl;
+    return indeks;
 }
 
 void kopiec::przywroc_wlasciwosci(int indeks){

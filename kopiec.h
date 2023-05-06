@@ -22,7 +22,7 @@ public:
 
     void wyswietl();
 
-    void znajdz(int value);
+    int znajdz(int wartosc);
 
     void przywroc_wlasciwosci(int indeks);
 

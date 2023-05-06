@@ -38,7 +38,7 @@ void tablicaDynamiczna::dodaj_na_koniec(int wartosc)
     {
         nowa_tablica[i] = tablica[i];
     }
-    tablica = nullptr;
+    delete tablica;
     tablica = nowa_tablica;
     rozmiar++;
 
@@ -133,7 +133,7 @@ void tablicaDynamiczna::usun(int pozycja)
     {
         int *nowa_tablica = new int[rozmiar - 1];
 
-        for (int i = 0; i < pozycja - 1; i++) //przepisanie wartości do nowej tablicy do usuniętego elementu
+        for (int i = 0; i < pozycja; i++) //przepisanie wartości do nowej tablicy do usuniętego elementu
         {
             nowa_tablica[i] = tablica[i];
         }
@@ -182,12 +182,6 @@ int tablicaDynamiczna::znajdz_element(int wartosc)
             pozycja = i;
             break;
         }
-    }
-    if (pozycja == -1){
-        cout<<"Brak wartosci " + to_string(wartosc) + " w tablicy."<<endl;
-    }
-    else{
-        cout<<"Wartosc " + to_string(wartosc) +" znajduje sie na pozycji o indeksie " + to_string(pozycja)<<endl;
     }
     return pozycja;
 }
