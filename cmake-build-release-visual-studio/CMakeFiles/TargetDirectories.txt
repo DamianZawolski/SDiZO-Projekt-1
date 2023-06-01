@@ -1,3 +1,0 @@
-C:/Users/damia/CLionProjects/SDiZO Projekt 1/cmake-build-release-visual-studio/CMakeFiles/SDiZO_Projekt_1.dir
-C:/Users/damia/CLionProjects/SDiZO Projekt 1/cmake-build-release-visual-studio/CMakeFiles/edit_cache.dir
-C:/Users/damia/CLionProjects/SDiZO Projekt 1/cmake-build-release-visual-studio/CMakeFiles/rebuild_cache.dir
